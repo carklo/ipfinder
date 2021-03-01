@@ -44,8 +44,8 @@ de recuperarse automáticamente en el menor tiempo posíble para poder seguir at
 ## Endpoints
 | Método | Path                      | Descripción     | Respuesta Ejemplo |
 |:-------|:------------------------- |:----------------|:----------------------|
-| `GET ` | `http://challenge-lb-254874731.us-east-1.elb.amazonaws.com/ipfinder/ip/{ip}` | Dada una IP que entra por parametro dentro de la URL se consulta la información geográfica (país, ISO code) así como su cotización en USD, en caso de que la IP se haya baneado se mostrara un mensaje de error en vez de la información respectiva.| `NO` | 
-| `POST ` | `http://challenge-lb-254874731.us-east-1.elb.amazonaws.com/ipfinder/banIp/{ip}` |Dada una IP que entra por parametro de la URL se consulta si esa IP ya existe dentro de la base de datos, en caso de que no se crea una IP con información vacía y un atributo que la identifica como no consultable, en caso de que existe (es decir, que fue consultada en el punto 1) se marca para no ser mas consultada.| `NO` | 
+| `GET ` | `http://challenge-lb-254874731.us-east-1.elb.amazonaws.com/ipfinder/ip/{ip}` | Dada una IP que entra por parametro dentro de la URL se consulta la información geográfica (país, ISO code) así como su cotización en USD, en caso de que la IP se haya baneado se mostrara un mensaje de error en vez de la información respectiva.| `{"ip":"129.204.20.248","country":"China","isoCode":{"alphaCode2":"CN","alphaCode3":"CHN","numericCode":"156"},"localCurrency":{"code":"CNY","name":"Chinese yuan","symbol":"¥","quotation":"6.465801 USD"},"banned":false} ` | 
+| `POST ` | `http://challenge-lb-254874731.us-east-1.elb.amazonaws.com/ipfinder/banIp/{ip}` |Dada una IP que entra por parametro de la URL se consulta si esa IP ya existe dentro de la base de datos, en caso de que no se crea una IP con información vacía y un atributo que la identifica como no consultable, en caso de que existe (es decir, que fue consultada en el punto 1) se marca para no ser mas consultada.| `The IP 85.214.132.117 was banned ` | 
 
 
 ## Ejecución como contenedor Docker local
