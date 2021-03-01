@@ -55,8 +55,9 @@ Para ejecutar el proyecto de manera local usar los siguientes comandos dentro de
 `docker run -p 8080:8080 ipfinder/challenge`
 
 ## Pruebas unitarias y funcionales
-Las pruebas unitarias se ubican bajo el directorio `src/test/java/com/meli/challenge/`, en resumen se realizaron un total de 17 test unitarios para la clase Controller
-y la clase Service que contienen la logica principal.
+
+### Pruebas unitarias
+Las pruebas unitarias se ubican bajo el directorio `src/test/java/com/meli/challenge/`, en resumen se realizaron un total de 17 test unitarios para la clase Controller y la clase Service usando como eje principal Mockito como framework de pruebas.
 
 ```
 [INFO] Results:
@@ -76,3 +77,18 @@ y la clase Service que contienen la logica principal.
 [INFO] ------------------------------------------------------------------------
 
 ```
+
+### Pruebas funcionales
+El desarrollo de las pruebas funcionales end-to-end se realizaron usando JMeter, este programa permite simular la carga concurrente de múltiples usuarios
+concurrentes, se cargó en formato CSV un archivo con mas 9000 IPs que una a una se iban cargando en un llamado de forma que se simulaba la consulta de miles de direcciones IP para obtener su información, en este caso se diseño un plan de pruebas con 4000 conexiones concurrentes en un ramp up de 200 segundos sobre el primer endpoint, obteniendo los siguientes resultados:
+
+[![fbkwAJ.md.png](https://iili.io/fbkwAJ.md.png)](https://freeimage.host/i/fbkwAJ)
+[![fbkNwv.md.png](https://iili.io/fbkNwv.md.png)](https://freeimage.host/i/fbkNwv)
+[![fbkknp.md.png](https://iili.io/fbkknp.md.png)](https://freeimage.host/i/fbkknp)
+[![fbkvMN.md.png](https://iili.io/fbkvMN.md.png)](https://freeimage.host/i/fbkvMN)
+[![fbk8PI.md.png](https://iili.io/fbk8PI.md.png)](https://freeimage.host/i/fbk8PI)
+
+En cuanto a los resultados de estas pruebas se comprobó que tanto la infraestructura como la misma implementación permiten soporta una agresiva carga de tráfico
+como era requerido, solamente cerca del 2% de 4000 solicitues terminaron en error 404 porque los servicios externos no pudieron encontrar información asociada a la dirección IP. 
+
+Los archivos JMX y el archivo con la lista de IPs se encuentran bajo el directorio `src/main/java/com/meli/challenge/resources`.
