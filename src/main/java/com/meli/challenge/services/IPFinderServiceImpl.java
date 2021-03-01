@@ -1,5 +1,7 @@
 package com.meli.challenge.services;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.challenge.domain.Currency;
 import com.meli.challenge.domain.IP;
 import com.meli.challenge.domain.ISOCode;
@@ -107,8 +109,9 @@ public class IPFinderServiceImpl implements IPFinderService {
       List<Map<String, Object>> currencies = (List<Map<String, Object>>) countryInfo.get("currencies");
       String currencyCode = (String) currencies.stream().findFirst().get().get("code");
       Map<String, Object> fixerCurrencyInfo = ipFinderService.getFixerInfo(currencyCode);
-      Map<String, Object> rates = (Map<String, Object>) fixerCurrencyInfo.get("rates");
-      Double price = (Double) rates.get(currencyCode);
+      ObjectMapper m = new ObjectMapper();
+      Map<String, String> rates = m.convertValue(fixerCurrencyInfo.get("rates"), new TypeReference<Map<String, String>>() {});
+      Double price = Double.valueOf(rates.get(currencyCode));
       ISOCode isoCodeEntity;
       Currency currencyEntity;
       Optional<ISOCode> isoCode = Optional.ofNullable(isoCodeRepository.findByalphaCode2(countryCode));

@@ -7,11 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -26,6 +22,7 @@ public class ISOCode {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonIgnore
   private int id;
+  @Column(unique=true)
   private String alphaCode2;
   private String alphaCode3;
   private String numericCode;

@@ -146,8 +146,8 @@ class IPFinderServiceImplTest {
     countryInfo.put("numericCode", "276");
     countryInfo.put("currencies", Collections.singletonList(currencies));
 
-    Map<String, Object> rates = new HashMap<>();
-    rates.put("EUR", 1.23);
+    Map<String, String> rates = new HashMap<>();
+    rates.put("EUR", "1.23");
 
     Map<String, Object> fixerInfo = new HashMap<>();
     fixerInfo.put("base", "USD");
